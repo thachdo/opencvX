@@ -67,7 +67,7 @@
 * OpenCVCam command line application can be used to access the UVC settings, HID settings, Streaming and Image capture of any e-con System cameras in both Windows and Linux.
 
 
-## How to install (opencv 4.5.5, ubuntu 18.04, under root privileges)
+## How to install (opencv 4.5.5, ubuntu 18.04, under root privileges), refer to [this Installation manual](https://github.com/econsystems/opencv/tree/master/Documents) for other configurations.
 
 * OpenCV can be downloaded from [here](https://github.com/opencv/opencv)
 ```
@@ -98,7 +98,8 @@ cd sources/
 mkdir release
 cd release/
 ```
-Build for python3 and generate `opencv4.pc` file, i.e., `OPENCV_GENERATE_PKGCONFIG=ON`
+* Replace Videoio module from OpenCV with [this videoio module](https://github.com/econsystems/opencv/tree/master/Source)
+* Build for python3 and generate `opencv4.pc` file, i.e., `OPENCV_GENERATE_PKGCONFIG=ON`
 ```
 cmake -D BUILD_TIFF=ON -D WITH_CUDA=OFF -D WITH_GENERATE_PKGCONFIG=ON -D WITH_OPENGL=OFF -D WITH_OPENCL=OFF -D WITH_IPP=OFF -D WITH_TBB=OFF -D BUILD_TBB=OFF -D WITH_EIGEN=OFF -D WITH_V4L=ON -D WITH_VTK=OFF -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D WITH_GSTREAMER=OFF -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_opencv_python3=ON -D BUILD_opencv_python2=OFF -D BUILD_opencv_world=ON -D OPENCV_GENERATE_PKGCONFIG=ON -D CMAKE_INSTALL_PREFIX=/usr/local ../
 make -j12 && make install
@@ -112,8 +113,6 @@ make
 ./OpenCVCam
 ```
 
-* Replace Videoio module from OpenCV with [this videoio module](https://github.com/econsystems/opencv/tree/master/Source)
-* Build OpenCV using [this Installation manual](https://github.com/econsystems/opencv/tree/master/Documents)
 * Information on how to use those newly Introduced APIs were [explained in API Documentation](https://github.com/econsystems/opencv/tree/master/Documents)
 * OpenCVCam command line application can be downloaded [from here](https://github.com/econsystems/opencv/tree/master/Source), which is used to access OpenCV APIs
 * Run Sample application using [this user manual](https://github.com/econsystems/opencv/tree/master/Documents)
