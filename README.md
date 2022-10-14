@@ -86,7 +86,7 @@ apt install libopenjp2-7-dev libopenjpip openjpip_server libopenjp2-tools
 
 apt install python3-pip
 pip3 install numpy
-git clone https://github.com/uclouvain/openjpeg.git
+git clone https://github.com/thachdo/openjpeg.git
 cd openjpeg
 mkdir build && cd build
 cmake ..
