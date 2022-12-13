@@ -68,43 +68,42 @@
 
 
 ## How to install 
-The configurations of this instruction are opencv 4.5.5, ubuntu 18.04, and under root privileges. Refer to [this Installation manual](https://github.com/econsystems/opencv/tree/master/Documents) for other configurations.
+The configurations of this instruction are opencv 4.5.5, ubuntu 18.04, and working directory is `/home` . Refer to [this Installation manual](https://github.com/econsystems/opencv/tree/master/Documents) for other configurations.
 
 * OpenCV can be downloaded from [here](https://github.com/opencv/opencv)
 ```
-cd opencv
-git checkout 4.5.5
+sudo apt update && sudo apt install -y git build-essential make cmake cmake-qt-gui g++ libv4l-dev libglew-dev libgtk2.0-dev libudev-dev libavformat-dev libavutil-dev libswscale-dev libavcodec-dev libdc1394-* libopencv-dev libavcodec-extra57 libavformat57 libavutil55 pkg-config ffmpeg libopenjp2-7-dev libopenjp2-tools python3-pip
 
-apt-get install build- essential make cmake cmake-qt- gui g++
-apt-get install build-essential make cmake cmake-qt-gui g++
-apt-get install libv4l-dev
-apt-get install libglew-dev
-apt-get install libgtk2.0-dev
-apt-get install libudev-dev
-apt-get install libavformat-dev libavutil-dev libswscale-dev libavcodec-dev libdc1394-* libopencv-dev libavcodec-extra57 libavformat57 libavutil55 pkg-config ffmpeg
-apt install libopenjp2-7-dev libopenjpip openjpip_server libopenjp2-tools
-
-apt install python3-pip
 pip3 install numpy
-git clone https://github.com/thachdo/openjpeg.git
-cd openjpeg
-mkdir build && cd build
-cmake ..
-make -j12 && make install
-cd ..
+
+cd opencv && \
+git checkout 4.5.5 && \
+git clone https://github.com/thachdo/openjpeg.git && \
+cd openjpeg && \
+mkdir build && cd build && \
+cmake .. && \
+make -j12 && sudo make install && \
+cd .. && \
 rm -rf openjpeg
-mkdir sources
-mv * sources/
-cd sources/
-mkdir release
-cd release/
-```
-* Replace Videoio module from OpenCV with [this videoio module](https://github.com/thachdo/opencvX/tree/master/Source/videoio)
-* Build for python3 and generate `opencv4.pc` file, i.e., `OPENCV_GENERATE_PKGCONFIG=ON`
-```
-cmake -D BUILD_TIFF=ON -D WITH_CUDA=OFF -D WITH_GENERATE_PKGCONFIG=ON -D WITH_OPENGL=OFF -D WITH_OPENCL=OFF -D WITH_IPP=OFF -D WITH_TBB=OFF -D BUILD_TBB=OFF -D WITH_EIGEN=OFF -D WITH_V4L=ON -D WITH_VTK=OFF -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D WITH_GSTREAMER=OFF -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_opencv_python3=ON -D BUILD_opencv_python2=OFF -D BUILD_opencv_world=ON -D OPENCV_GENERATE_PKGCONFIG=ON -D CMAKE_INSTALL_PREFIX=/usr/local ../
-make -j12 && make install
-ldconfig -v
+
+git clone https://github.com/opencv/opencv_contrib.git && cd opencv_contrib && git checkout 4.5.5
+git clone https://github.com/thachdo/opencvX.git
+
+rm -rf opencv/modules/videoio/ && cp -r opencvX/Source/videoio/ opencv/modules/
+
+cd opencv && \
+mkdir build && \
+cd build && \
+cmake -D BUILD_TIFF=ON -D WITH_CUDA=OFF -D WITH_GENERATE_PKGCONFIG=ON \
+-D WITH_OPENGL=OFF -D WITH_OPENCL=OFF -D WITH_IPP=OFF -D WITH_TBB=OFF \
+-D BUILD_TBB=OFF -D WITH_EIGEN=OFF -D WITH_V4L=ON -D WITH_VTK=OFF \
+-D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D WITH_GSTREAMER=OFF \
+-D CMAKE_BUILD_TYPE=RELEASE -D BUILD_opencv_world=ON \
+-D OPENCV_EXTRA_MODULES_PATH=/home/opencv_contrib/modules \
+-D CMAKE_INSTALL_PREFIX=/usr/local ../  && \
+make -j12 && \
+sudo make install
+cd /home/ && rm -rf opencv*
 ```
 > Run an example (use See3Cam), go to the opencvX directory
 
