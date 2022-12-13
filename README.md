@@ -86,6 +86,7 @@ make -j12 && sudo make install && \
 cd .. && \
 rm -rf openjpeg
 
+cd /home
 git clone https://github.com/opencv/opencv_contrib.git && cd opencv_contrib && git checkout 4.5.5
 git clone https://github.com/thachdo/opencvX.git
 
